@@ -1,7 +1,12 @@
 <?php
-
+$isCloud = env('FILESYSTEM_IS_CLOUD', false);
+$s3accessArray = [
+    'key'    => env('AWS_ACCESS_KEY_ID'),
+    'secret' => env('AWS_SECRET_ACCESS_KEY'),
+    'region' => env('AWS_DEFAULT_REGION'),
+    'bucket' => env('AWS_BUCKET'),
+];
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Default Filesystem Disk
@@ -14,6 +19,17 @@ return [
     */
 
     'default' => env('FILESYSTEM_DISK', 'local'),
+
+     /*
+    |--------------------------------------------------------------------------
+    | Default Cloud Disk
+    |--------------------------------------------------------------------------
+    |
+    | Here you may specify the default cloud disk that should be used
+    | by the framework. The cloud based disks are available to your application. Just store away!
+    |
+    */
+    'cloud' => env('FILESYSTEM_CLOUD', 's3'),
 
     /*
     |--------------------------------------------------------------------------
@@ -56,6 +72,11 @@ return [
             'throw' => false,
         ],
 
+        //TODO 
+        BookStorage => array_merge([
+            'driver' => $isCloud ? 's3' : 'local',
+            'root'   => $isCloud ? S3DiscConstants::INVOICES : storage_path(S3DiscConstants::INVOICES),
+        ], $s3settings),
     ],
 
     /*
