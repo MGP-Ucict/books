@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\EnumConstants\S3DiscConstants;
 use App\Http\Controllers\Controller;
+use App\Http\Filters\BookFilters;
 use App\Models\Book;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -59,3 +60,4 @@ class BookController extends Controller
     {
         return Storage::disk(S3DiscConstants::Book)->download($book->file_name);
     }
+}

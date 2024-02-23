@@ -13,7 +13,7 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    <a href="{{route('book.show', $book)}}" class="link">
+                    <a href="{{route('book.create')}}" class="link">
                         <i class="las la-file-alt"></i>
                         {{ __('Create Book') }}
                     </a>
