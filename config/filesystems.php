@@ -1,4 +1,6 @@
 <?php
+use App\EnumConstants\S3DiscConstants;
+
 $isCloud = env('FILESYSTEM_IS_CLOUD', false);
 $s3accessArray = [
     'key'    => env('AWS_ACCESS_KEY_ID'),
@@ -72,11 +74,10 @@ return [
             'throw' => false,
         ],
 
-        //TODO 
-        BookStorage => array_merge([
+        S3DiscConstants::BOOKS => array_merge([
             'driver' => $isCloud ? 's3' : 'local',
-            'root'   => $isCloud ? S3DiscConstants::INVOICES : storage_path(S3DiscConstants::INVOICES),
-        ], $s3settings),
+            'root'   => $isCloud ? S3DiscConstants::BOOKS : storage_path(S3DiscConstants::BOOKS),
+        ], $s3accessArray),
     ],
 
     /*
