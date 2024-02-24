@@ -62,7 +62,7 @@
              setFile(file) {
                 this.fileName = file;
             },
-            save(url) {
+            save(url, formData) {
                 axios.post(url, formData, {
                         headers: {
                             'Content-Type': 'multipart/form-data'
@@ -97,10 +97,10 @@
                 }
                 this.success = false;
                 if (!this.isEdit) {
-                    this.save(`/api/book/`);
+                    this.save(`/api/book/`, formData);
                 } else {
                     formData.append('_method', 'PUT');
-                    this.save(`/api/book/` + this.book.id);
+                    this.save(`/api/book/` + this.book.id, formData);
                 }
             }
         },
