@@ -1,28 +1,28 @@
 <template>
     <div>
         <div class="form-group">
-            <label>{{ $t('Title')}}</label>
-            <input type="text" id="title" :placeholder="$t('Title')" v-model="title" class="form-control">
+            <label>Title</label>
+            <input type="text" id="title" :placeholder="Title" v-model="title" class="form-control">
         </div>
         <div class="form-group">
-            <label>{{ $t('Author')}}</label>
-            <input type="text" id="author" :placeholder="$t('Author')" v-model="author" class="form-control">
+            <label>Author</label>
+            <input type="text" id="author" :placeholder="Author" v-model="author" class="form-control">
         </div>
         <div class="form-group">
-            <label>{{ $t('Count pages')}}</label>
-            <input type="number" id="count-pages" :placeholder="$t('Count pages')" v-model="countPages" class="form-control">
+            <label>Count pages</label>
+            <input type="number" id="count-pages" :placeholder="Pages" v-model="countPages" class="form-control">
         </div>
         <div class="form-group">
-            <label>{{ $t('Price')}}</label>
-            <input type="number" id="price" :placeholder="$t('Price')" v-model="price" class="form-control" :min="0.00" :step="0.01">
+            <label>Price</label>
+            <input type="number" id="price" :placeholder="Price" v-model="price" class="form-control" :min="0.00" :step="0.01">
         </div>
         <div class="form-group">
-            <label>{{ $t('Description')}}</label>
-            <textarea id="description" :placeholder="$t('Description')" v-model="description"></textarea>
+            <label>Description</label>
+            <textarea id="description" :placeholder="Description" v-model="description" class="form-control"></textarea>
         </div>
         <upload-file @uploadFile="setFilename($event)" inputname="filename"
-               :placeholder="$t('File upload') + '<i class=\'las la-upload\'></i>'"
-               :label="$t('Upload E-book')" mutedtext=""></upload-file>
+               :placeholder="File + '<i class=\'las la-upload\'></i>'"
+               :label="E-book" mutedtext=""></upload-file>
         <div class="alert alert-danger" v-for="error in errors" :key="error.id">
             <div v-for="e in error">
                 {{$t(e)}}
@@ -33,7 +33,7 @@
         </div>
         <div class="form-group w-100">
             <button type="submit" @click.prevent="handleSubmit" class="btn btn-primary d-block mx-auto">
-               {{ $t('Save')}}
+               Save
             </button>
         </div>
     </div>
@@ -56,6 +56,7 @@
             success: false,
             isDisabled: false,
             errors: [],
+            };
         },
         methods: {
             handleSubmit() {

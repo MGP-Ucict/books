@@ -1,5 +1,8 @@
 import 'bootstrap';
 
+import '../sass/app.scss';
+                                                            
+                                                        
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
  * to our Laravel back-end. This library automatically handles sending the
@@ -10,6 +13,14 @@ import axios from 'axios';
 window.axios = axios;
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+const crf_token = document.querySelectorAll('meta[name="csrf-token"]');
+axios.defaults.headers['Content-Type'] = 'application/json';
+axios.defaults.headers['Accept'] = 'application/json';
+axios.defaults.headers['Access-Control-Allow-Origin'] = '*';
+
+if (crf_token[0]) {
+    axios.defaults.headers.common['X-CSRF-TOKEN'] = crf_token[0].getAttribute('content');
+}
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening

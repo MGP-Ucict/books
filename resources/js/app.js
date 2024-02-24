@@ -1,6 +1,11 @@
 import './bootstrap';
-const files = require.context('./', true, /\.vue$/i);
-files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
-const app = new Vue({
-    el: '#app',
-});
+import { createApp } from 'vue/dist/vue.esm-bundler.js';
+import Book from './components/Book.vue';
+
+const app = createApp({});
+app.component('book', Book);
+app.mount('#app');
+const lang = document.getElementsByTagName('html')[0].getAttribute('lang');
+if (lang) {
+    window.lang = lang;
+}
