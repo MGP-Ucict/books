@@ -95,8 +95,7 @@
                             }
                         });
                 } else {
-                    formData.append('_method', 'PUT');
-                    axios.post(`/api/book/` + this.book.id, formData, {
+                    axios.put(`/api/book/` + this.book.id, formData, {
                         headers: {
                             'Content-Type': 'multipart/form-data'
                         }

@@ -19,4 +19,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('/book', [App\Http\Controllers\Api\BookController::class, 'store']);
-Route::put('/book', [App\Http\Controllers\Api\BookController::class, 'update']);
+Route::put('/book/{book}', [App\Http\Controllers\Api\BookController::class, 'update']);
