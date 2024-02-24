@@ -32,7 +32,7 @@
             Sucessfully saved data!
         </div>
         <div class="form-group w-100">
-            <button type="submit" @click.prevent="handleSubmit"  :disabled="isDisabled && !!isEdit"class="btn btn-primary d-block mx-auto">
+            <button type="submit" @click.prevent="handleSubmit"  :disabled="isDisabled"class="btn btn-primary d-block mx-auto">
                Save
             </button>
         </div>
