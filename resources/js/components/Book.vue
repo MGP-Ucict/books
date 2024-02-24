@@ -20,7 +20,7 @@
             <label>Description</label>
             <textarea id="description" :placeholder="Description" v-model="description" class="form-control"></textarea>
         </div>
-        <upload-file @uploadFile="setFilename($event)" inputname="filename"
+        <upload-file @uploadFile="setFile($event)" inputname="filename"
                placeholder="File"
                label="E-book" mutedtext=""></upload-file>
         <div class="alert alert-danger" v-for="error in errors" :key="error.id">
@@ -28,8 +28,8 @@
                 {{e}}
             </div>
         </div>
-        <div class="text-success my-4 text-center">
-            {{ successMessage }}
+        <div class="text-success my-4 text-center" v-show="success">
+            Sucessfully saved data!
         </div>
         <div class="form-group w-100">
             <button type="submit" @click.prevent="handleSubmit" class="btn btn-primary d-block mx-auto">
@@ -52,13 +52,16 @@
             countPages: (typeof this.book !== "undefined") ? this.book.count_pages : 0,
             price: (typeof this.book !== "undefined") ? this.book.price : 0,
             description: (typeof this.book !== "undefined") ? this.book.description : '',
-            seccessMessage: '',
+            fileName: (typeof this.book !== "undefined") ? this.book.file_name : '',
             success: false,
             isDisabled: false,
             errors: [],
             };
         },
         methods: {
+             setFile(file) {
+                this.fileName = file;
+            },
             handleSubmit() {
                 this.isDisabled = true;
                 const formData = new FormData();
@@ -67,6 +70,7 @@
                 formData.append('count_pages', this.countPages);
                 formData.append('price', this.price);
                 formData.append('description', this.description);
+                formData.append('file_name', this.fileName);
                 this.success = false;
                 if (!this.isEdit) {
                     axios.post(`/api/book/`, formData,  {

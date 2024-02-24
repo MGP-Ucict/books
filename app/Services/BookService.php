@@ -5,6 +5,7 @@ namespace App\Services;
 use App\EnumConstants\S3DiscConstants;
 use App\Models\Book;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class BookService 
 {
@@ -16,7 +17,7 @@ class BookService
 	public static function saveBookFile($validated)
 	{
 		$filePath = $validated['title'] . "-". $validated['author'] . ".pdf";
- 		Storage::disk(S3DiscConstants::Book)->put($filePath, $validated['file_name']);
+ 		Storage::disk(S3DiscConstants::BOOKS)->write($filePath, $validated['file_name']);
  		return $filePath;
 	}
 
