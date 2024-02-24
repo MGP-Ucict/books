@@ -13,7 +13,7 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    <book is-edit="false"></book>
+                    <book :is-edit="false"></book>
                 </div>
             </div>
         </div>

@@ -19,7 +19,7 @@ class BookController extends Controller
      */
     public function store(Request $request): JsonResponse
     {
-        $validated = $request->validated([
+        $validated = $request->validate([
             'title' => 'required|string',
             'author' => 'required|string',
             'count_pages' => 'required|integer|gt:0',
@@ -45,7 +45,7 @@ class BookController extends Controller
      */
     public function update(Request $request, Book $book): JsonResponse
     {
-        $validated = $request->validated([
+        $validated = $request->validate([
             'title' => 'required|string',
             'author' => 'required|string',
             'count_pages' => 'required|integer',

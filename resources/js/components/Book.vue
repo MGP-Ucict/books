@@ -21,11 +21,11 @@
             <textarea id="description" :placeholder="Description" v-model="description" class="form-control"></textarea>
         </div>
         <upload-file @uploadFile="setFilename($event)" inputname="filename"
-               :placeholder="File + '<i class=\'las la-upload\'></i>'"
-               :label="E-book" mutedtext=""></upload-file>
+               placeholder="File"
+               label="E-book" mutedtext=""></upload-file>
         <div class="alert alert-danger" v-for="error in errors" :key="error.id">
             <div v-for="e in error">
-                {{$t(e)}}
+                {{e}}
             </div>
         </div>
         <div class="text-success my-4 text-center">
