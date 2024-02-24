@@ -32,7 +32,7 @@
             Sucessfully saved data!
         </div>
         <div class="form-group w-100">
-            <button type="submit" @click.prevent="handleSubmit"  :disabled="isDisabled"class="btn btn-primary d-block mx-auto">
+            <button type="submit" @click.prevent="handleSubmit"  :disabled="isDisabled" class="btn btn-primary d-block mx-auto">
                Save
             </button>
         </div>
@@ -51,8 +51,8 @@
             author: (typeof this.book !== "undefined") ? this.book.author : '',
             countPages: (typeof this.book !== "undefined") ? this.book.count_pages : 0,
             price: (typeof this.book !== "undefined") ? this.book.price : 0,
-            description: (typeof this.book !== "undefined") ? this.book.description : '',
-            fileName: (typeof this.book !== "undefined") ? this.book.file_name : '',
+            description: (typeof this.book !== "undefined") ? JSON.parse(this.book.description) : '',
+            fileName: '',
             success: false,
             isDisabled: false,
             errors: [],

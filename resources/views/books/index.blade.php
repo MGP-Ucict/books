@@ -38,7 +38,7 @@
                                 {{ __('Price')  }}
                             </div>
                             <div class="col-md-3 px-4 py-3 name">
-                                {{ __('Опции') }}
+                                {{ __('Options') }}
                             </div>
                         </div>
                         @foreach($books as $book)

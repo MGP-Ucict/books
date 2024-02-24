@@ -27,8 +27,9 @@ class BookController extends Controller
             'description' => 'nullable',
             'file_name' => 'sometimes|file|mimes:pdf|max:10240'
         ]);
-        
-        $validated['file_name'] = BookService::saveBookFile($validated);
+         if (isset($validated['file_name'])) {
+            $validated['file_name'] = BookService::saveBookFile($validated);
+        }
         $book = Book::create($validated);
 
         return response()->json([
@@ -54,7 +55,7 @@ class BookController extends Controller
             'file_name' => 'sometimes|file|mimes:pdf|max:10240'
         ]);
 
-        if (!is_null($validated['file_name'])) {
+        if (isset($validated['file_name'])) {
             $validated['file_name'] = BookService::saveBookFile($validated);
         }
         $book->update($validated);
