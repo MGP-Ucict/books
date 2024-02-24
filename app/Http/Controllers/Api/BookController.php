@@ -45,7 +45,6 @@ class BookController extends Controller
      */
     public function update(Request $request, Book $book): JsonResponse
     {
-        dd($request->all());
         $validated = $request->validate([
             'title' => 'required|string',
             'author' => 'required|string',

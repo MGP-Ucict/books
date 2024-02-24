@@ -62,40 +62,8 @@
              setFile(file) {
                 this.fileName = file;
             },
-            handleSubmit() {
-                this.isDisabled = true;
-                const formData = new FormData();
-                formData.append('title', this.title);
-                formData.append('author', this.author);
-                formData.append('count_pages', this.countPages);
-                formData.append('price', this.price);
-                formData.append('description', this.description);
-                if (this.fileName) {
-                    formData.append('file_name', this.fileName);
-                }
-                this.success = false;
-                if (!this.isEdit) {
-                    axios.post(`/api/book/`, formData,  {
-                        headers: {
-                            'Content-Type': 'multipart/form-data'
-                        }
-                    }).then((response) => {
-                            if (response.status === 200 || response.status === 201) {
-                                this.success = true;
-                                window.location.href = '/books/';
-                            } else {
-                                this.isDisabled = false;
-                                if (response.errors) {
-                                    this.errors = response.errors;
-                                }
-                            }
-                        }).catch((error) => {
-                            if (error.response.status === 422) {
-                                this.errors = error.response.data.errors;
-                            }
-                        });
-                } else {
-                    axios.put(`/api/book/` + this.book.id, formData, {
+            save(url) {
+                axios.post(url, formData, {
                         headers: {
                             'Content-Type': 'multipart/form-data'
                         }
@@ -111,9 +79,28 @@
                             }
                         }).catch((error) => {
                             if (error.response.status === 422) {
+                                this.isDisabled = false;
                                 this.errors = error.response.data.errors;
                             }
                     });
+            },
+            handleSubmit() {
+                this.isDisabled = true;
+                const formData = new FormData();
+                formData.append('title', this.title);
+                formData.append('author', this.author);
+                formData.append('count_pages', this.countPages);
+                formData.append('price', this.price);
+                formData.append('description', this.description);
+                if (this.fileName) {
+                    formData.append('file_name', this.fileName);
+                }
+                this.success = false;
+                if (!this.isEdit) {
+                    this.save(`/api/book/`);
+                } else {
+                    formData.append('_method', 'PUT');
+                    this.save(`/api/book/` + this.book.id);
                 }
             }
         },
