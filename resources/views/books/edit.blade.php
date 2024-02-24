@@ -13,7 +13,7 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    <book :book='@json($book)' is-edit="false"></book>
+                    <book :book='@json($book)' :is-edit="true"></book>
                 </div>
             </div>
         </div>

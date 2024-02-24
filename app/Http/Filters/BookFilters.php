@@ -14,14 +14,20 @@ class BookFilters extends QueryFilters
         parent::__construct($request);
     }
 
-    public function title($title)
+    public function q($queryString = null)
     {
-        return $this->builder->where('title', $title);
-    }
+        if (!$queryString) {
+            return $this->builder;
+        }
+        $queryStringArr = explode(" ", $queryString);
+        $maxIteration = count($queryStringArr) < 4 ? count($queryStringArr) : 4;
+        for ($i = 0; $i < $maxIteration; $i++) {
+            $queryString = $queryStringArr[$i];
+            $this->builder->where(function ($query) use ($queryString) {
+                return $this->bookSearchQueryDetails($query, $queryString);
+            });
+        }
 
-    public function author($author)
-    {
-       return $this->builder->where('author', $author);
     }
 }
 

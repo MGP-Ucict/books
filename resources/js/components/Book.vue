@@ -32,7 +32,7 @@
             Sucessfully saved data!
         </div>
         <div class="form-group w-100">
-            <button type="submit" @click.prevent="handleSubmit" class="btn btn-primary d-block mx-auto">
+            <button type="submit" @click.prevent="handleSubmit"  :disabled="isDisabled && !!isEdit"class="btn btn-primary d-block mx-auto">
                Save
             </button>
         </div>
@@ -70,7 +70,9 @@
                 formData.append('count_pages', this.countPages);
                 formData.append('price', this.price);
                 formData.append('description', this.description);
-                formData.append('file_name', this.fileName);
+                if (this.fileName) {
+                    formData.append('file_name', this.fileName);
+                }
                 this.success = false;
                 if (!this.isEdit) {
                     axios.post(`/api/book/`, formData,  {

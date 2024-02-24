@@ -54,4 +54,18 @@ class QueryFilters
     {
         return $this->request->all();
     }
+
+    /**
+     * @param $query
+     * @param string|null $queryString
+     * @return Builder
+     */
+    public function bookSearchQueryDetails($query, ?string $queryString = null): Builder
+    {
+        $queryStringLower = mb_strtolower($queryString);
+         $query
+            ->where('title', 'like', '%' . $queryString . '%')
+            ->orWhere('author', 'like', '%' . $queryString . '%');
+        return $query;
+    }
 }

@@ -17,6 +17,14 @@
                         <i class="las la-file-alt"></i>
                         {{ __('Create Book') }}
                     </a>
+                    <div class="flex mb-3">
+                            <form method="GET" action="{{ route('books.index') }}">
+                                <input name="q" type="text" class="form-control" 
+                                       value="{{ request()->has('q') ? request()->get('q') : '' }}"
+                                       placeholder="{{ __('Search by name of the author or title of the book') }}">
+                                <button type="submit" class="btn btn-primary form-control">{{ __('Search') }}</button>
+                            </form>
+                        </div>
                     @if(count($books))
                     <div class="table-content container mb-5">
                         <div class="table-row header row">
@@ -45,36 +53,24 @@
                                     {{ $book->price }} BGN
                                 </div>
                                 <div class="col-md-3 px-4 py-3">
-                                    <dropdown-button arrow="true" button="
-                                        <span class='link'>
-                                            <img width='15px' style='margin: -2px 5px 0 0;'src='{{asset('images/icons/icon-settings.png')}}'/>{{__('Опции')}}
-                                        </span>">
-                                        <div>
-                                            <ul>
-                                                <li>
-                                                    <a href="{{route('book.show', $book)}}"
-                                                       class="link">
-                                                        <i class="las la-file-alt"></i>
-                                                        {{ __('Book Details') }}
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="{{route('book.edit', $book)}}"
-                                                       class="link">
-                                                        <i class="las la-edit"></i>
-                                                        {{ __('Book Edit') }}
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="{{route('book.show', $book)}}"
-                                                       class="link">
-                                                        <i class="las la-download"></i>
-                                                        {{ __('Book Download') }}
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </dropdown-button>
+                                    <a href="{{route('book.show', $book)}}"
+                                       class="btn btn-success">
+                                        <i class="las la-file-alt"></i>
+                                        {{ __('Book Details') }}
+                                    </a>
+                            
+                                    <a href="{{route('book.edit', $book)}}"
+                                       class="btn btn-warning">
+                                        <i class="las la-edit"></i>
+                                        {{ __('Book Edit') }}
+                                    </a>
+                            
+                                    <a href="{{route('book.download', $book)}}"
+                                       class="btn btn-primary">
+                                        <i class="las la-download"></i>
+                                        {{ __('Book Download') }}
+                                    </a>
+                                            
                                 </div>
                             </div>
                         @endforeach

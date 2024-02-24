@@ -25,7 +25,7 @@ class BookController extends Controller
             'count_pages' => 'required|integer|gt:0',
             'price' => 'required|gt:0',
             'description' => 'nullable',
-            'file_name' => 'nullable|file|mimes:pdf|max:10240'
+            'file_name' => 'sometimes|file|mimes:pdf|max:10240'
         ]);
         
         $validated['file_name'] = BookService::saveBookFile($validated);
@@ -45,16 +45,19 @@ class BookController extends Controller
      */
     public function update(Request $request, Book $book): JsonResponse
     {
+        dd($request->all());
         $validated = $request->validate([
             'title' => 'required|string',
             'author' => 'required|string',
             'count_pages' => 'required|integer',
             'price' => 'required',
             'description' => 'nullable',
-            'file_name' => 'nullable|file|mimes:pdf|max:10240'
+            'file_name' => 'sometimes|file|mimes:pdf|max:10240'
         ]);
-        
-        $validated['file_name'] = BookService::saveBookFile($validated);
+
+        if (!is_null($validated['file_name'])) {
+            $validated['file_name'] = BookService::saveBookFile($validated);
+        }
         $book->update($validated);
 
         return response()->json([

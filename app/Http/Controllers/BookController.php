@@ -10,6 +10,7 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Storage;
 
 
 class BookController extends Controller
@@ -50,6 +51,22 @@ class BookController extends Controller
         ]);
     }
 
+
+    /**
+     * Show the form for editing a book.
+     * 
+     * @param Book $book
+     * @return Application|Factory|View
+     */
+    public function show(Book $book)
+    {
+        return view('books.show', [
+            'book' => $book
+        ]);
+    }
+    
+
+
     /**
      * Download an e-book
      * 
@@ -58,6 +75,6 @@ class BookController extends Controller
      */
     public function download(Book $book)
     {
-        return Storage::disk(S3DiscConstants::Book)->download($book->file_name);
+        return Storage::disk(S3DiscConstants::BOOKS)->download($book->file_name);
     }
 }
