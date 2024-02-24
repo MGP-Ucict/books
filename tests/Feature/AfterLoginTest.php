@@ -51,6 +51,6 @@ class AfterLoginTest extends TestCase
                 'password' => $this->password
             ]);
 
-        $response->assertNotSame('/books' === Route::current());
+        $this->assertNotSame('/books' === Route::current());
     }
 }
