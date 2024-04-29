@@ -51,7 +51,7 @@
             author: (typeof this.book !== "undefined") ? this.book.author : '',
             countPages: (typeof this.book !== "undefined") ? this.book.count_pages : 0,
             price: (typeof this.book !== "undefined") ? this.book.price : 0,
-            description: (typeof this.book !== "undefined") ? JSON.parse(this.book.description) : '',
+            description: (typeof this.book !== "undefined") ? this.book.description : '',
             fileName: '',
             success: false,
             isDisabled: false,
